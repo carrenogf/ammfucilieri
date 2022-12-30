@@ -1,0 +1,129 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* añadido por mi */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6, p, div, strong, a, li, input {
+  font-family: "Montserrat", sans-serif;
+}
+
+.secular {
+  font-family: "Secular One", sans-serif;
+}
+
+.fcc {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fcs {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.fr {
+  display: flex;
+  flex-direction: row;
+}
+
+.redes-container {
+  width: 30%;
+}
+
+.servicios_contacto {
+  padding: 15px;
+  background-size: cover;
+  
+}
+.servicios_contacto .home__serviceTit {
+  height: 10%;
+  text-align: center;
+}
+.servicios_contacto .home__serviceCard_cont {
+  height: 90%;
+}
+.servicios_contacto .home__serviceCard_cont .home__serviceCard {
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.3);
+  text-align: center;
+  margin: 5px;
+  width: 80%;
+}
+.servicios_contacto .home__serviceCard_cont .home__serviceCard:hover {
+  background-color: rgba(154, 208, 211, 0.3);
+}
+
+.carousel-item-dark {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.4);
+  top: 0;
+  height: 100%;
+  width: 100%;
+}
+
+@media (max-width: 766px) {
+  .presentacion1 {
+    text-align: center;
+  }
+  .presentacion2 {
+    flex-direction: column-reverse;
+    text-align: center;
+  }
+  .redes-container {
+    width: 70%;
+  }
+}
+.servicio .servicio__titulo {
+  font-size: 3rem;
+}
+.servicio .servicio__subtitulo {
+  font-size: 1.5rem;
+}
+.servicio .servicio__descripcion {
+  font-size: 1rem;
+}
