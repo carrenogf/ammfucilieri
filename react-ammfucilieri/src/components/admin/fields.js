@@ -27,15 +27,6 @@ export const fields = [
     required:"required"
   },
   {
-    name:"img1",
-    fromComponent:"input",
-    id:"id_img1",
-    className:"form-control",
-    label:"Imagen 1",
-    typeInput:"file",
-    required:""
-  },
-  {
     name:"titulo2",
     fromComponent:"input",
     id:"id_titulo2",
@@ -53,15 +44,7 @@ export const fields = [
     typeInput:"text",
     required:"required"
   },
-  {
-    name:"img2",
-    fromComponent:"input",
-    id:"id_img2",
-    className:"form-control",
-    label:"Imagen 2",
-    typeInput:"file",
-    required:""
-  },
+
 ]
 
 export const imgUrls = {
