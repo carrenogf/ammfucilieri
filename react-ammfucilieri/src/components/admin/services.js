@@ -10,11 +10,12 @@ export const Services = ()=>{
     getDocs(collection(db,'services')).then((snapshot)=>{
       const servList = snapshot.docs.map((service)=>({id:service.id, ...service.data()}));
       setServices(servList);
+      console.log('lectura de servicios')
     })
-  })
-  if (services.length === 0){
-    return <p>Loading...</p>;
-  }
+  },[])
+  // if (services.length === 0){
+  //   return <p>Loading...</p>;
+  // }
   return (
     <div id="accordion">
       <div className="card">
@@ -30,13 +31,17 @@ export const Services = ()=>{
         <div className="d-flex flex-row justify-content-between">
           <h2>Servicios</h2>
           <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Agregar +</button>
+        
         </div>
-          {services.map((service)=>(
+        {services.length === 0 ? <p>Loading...</p> :
+          services.map((service)=>(
             <div key={service.id} className="card-body">
               <ServiceCard service={service} />
             </div>
-          ))}
+          ))
+        }
         </div>
+     
       </div>
     </div>
   )

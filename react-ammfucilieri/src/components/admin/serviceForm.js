@@ -1,8 +1,8 @@
 import { useState } from "react"
-import { ref, child, push, update } from "firebase/database";
-import { db } from "../../firebase/config";
-import { uploadfileUrl } from "../../firebase/storage";
-
+import { uploadfileUrl} from "../../firebase/storage";
+import { getDatabase,ref as dbref,push} from "firebase/database";
+import { app } from "../../firebase/config";
+import {getFirestore,setDoc,doc} from "firebase/firestore";
 export const ServiceForm = ()=> {
   const [servicesFormData, setServicesFormData] = useState({
     titulo: '',
@@ -22,11 +22,19 @@ export const ServiceForm = ()=> {
       })
     }
   }
-  const enviarDatos = (event) => {
-    event.preventDefault()
-    const newServiceKey = push(child(ref(db), 'services')).key;
-    const urlImg = uploadfileUrl(servicesFormData.imagen,`img/services/${newServiceKey}`)
-    console.log(urlImg)
+  async function enviarDatos (event) {
+    event.preventDefault();
+    const db = getDatabase(app);
+    const newService =  push(dbref(db,"services"));
+    const newServiceKey = newService.key;
+    const urlImg = await uploadfileUrl(servicesFormData.imagen,`img/services/${newServiceKey}`);
+    setDoc(doc(getFirestore(app),'services',newServiceKey),{
+      titulo:servicesFormData.titulo,
+      subtitulo:servicesFormData.subtitulo,
+      descripcion:servicesFormData.descripcion,
+      urlImg:urlImg,
+    }).then(()=>window.location.reload())
+
   }
 
   return (
