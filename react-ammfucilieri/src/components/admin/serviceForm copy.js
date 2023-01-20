@@ -10,6 +10,7 @@ export const ServiceForm = ()=> {
     descripcion: '',
     imagen: '',
   })
+
   const handleInputChange = (event) => {
     if (event.target.name === 'imagen'){
       setServicesFormData({...servicesFormData,
@@ -24,24 +25,18 @@ export const ServiceForm = ()=> {
   async function enviarDatos (event) {
     event.preventDefault();
     const db = getDatabase(app);
-    const updateServiceInput = document.getElementById("serviceUpdate");
-    if (updateServiceInput.value!=0){
-      const newService =  push(dbref(db,"services"));
-      const ServiceKey = newService.key;
-      const urlImg = await uploadfileUrl(servicesFormData.imagen,`img/services/${ServiceKey}`);
-      setDoc(doc(getFirestore(app),'services',ServiceKey),{
-        titulo:servicesFormData.titulo,
-        subtitulo:servicesFormData.subtitulo,
-        descripcion:servicesFormData.descripcion,
-        urlImg:urlImg,
-      }).then(()=>window.location.reload())
-    }else {
-      console.log(`actualizando registro ${updateServiceInput}`)
-    }
-
+    const newService =  push(dbref(db,"services"));
+    const newServiceKey = newService.key;
+    const urlImg = await uploadfileUrl(servicesFormData.imagen,`img/services/${newServiceKey}`);
+    setDoc(doc(getFirestore(app),'services',newServiceKey),{
+      titulo:servicesFormData.titulo,
+      subtitulo:servicesFormData.subtitulo,
+      descripcion:servicesFormData.descripcion,
+      urlImg:urlImg,
+    }).then(()=>window.location.reload())
 
   }
-  function prueba (text) {console.log(text)}
+
   return (
     <div className="modal fade" id="exampleModal" tabIndex="-1"  aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div className="modal-dialog" role="document">
@@ -52,10 +47,9 @@ export const ServiceForm = ()=> {
           </div>
           <div className="modal-body">
             <form id="servicesForm" onSubmit={enviarDatos}>
-              <input id="serviceUpdate" type="hidden" />
               <div className="form-group">
                 <label htmlFor="servicio-img" className="col-form-label">Imagen:</label>
-                <input onChange={handleInputChange} name="imagen" type="file" className="form-control" id="servicio-img" required="required" />
+                <input onChange={handleInputChange} name="imagen" type="file" className="form-control" id="service-img" required="required" />
               </div>
               <div className="form-group">
                 <label htmlFor="servicio-titulo" className="col-form-label">Titulo:</label>
@@ -63,7 +57,7 @@ export const ServiceForm = ()=> {
               </div>
               <div className="form-group">
                 <label htmlFor="servicio-subtitutulo" className="col-form-label">Subtitulo:</label>
-                <input onChange={handleInputChange} name="subtitulo" type="text" className="form-control" id="servicio-subtitulo" required="required"/>
+                <input onChange={handleInputChange} name="subtitulo" type="text" className="form-control" id="servicio-subtitutulo" required="required"/>
               </div>
               <div className="form-group">
                 <label htmlFor="servicio-descripcion" className="col-form-label">descripcion:</label>
@@ -71,7 +65,7 @@ export const ServiceForm = ()=> {
               </div>
               <div className="modal-footer">
                 <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                <div id="button-container"><button type="submit" className="btn btn-primary">Agregar</button></div>
+                <button type="submit" className="btn btn-primary">Agregar +</button>
               </div>
             </form>
           </div>

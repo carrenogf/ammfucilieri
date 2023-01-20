@@ -3,18 +3,28 @@ import {collection,getDocs} from "firebase/firestore"
 import { useEffect,useState } from "react";
 import { ServiceCard } from "./serviceCard";
 import { ServiceForm } from "./serviceForm";
+import { getElementError } from "@testing-library/react";
 export const Services = ()=>{
   const [services,setServices] = useState([]);
-
   useEffect(()=>{
     getDocs(collection(db,'services')).then((snapshot)=>{
       const servList = snapshot.docs.map((service)=>({id:service.id, ...service.data()}));
       setServices(servList);
     })
   },[])
-  // if (services.length === 0){
-  //   return <p>Loading...</p>;
-  // }
+  function agregarServicio() {
+    const updateServiceInput = document.getElementById("serviceUpdate");
+    updateServiceInput.value = 0
+    const formTitle =  document.getElementById("servicio-titulo");
+    const formSubTitle =  document.getElementById("servicio-subtitulo");
+    const formDescription =  document.getElementById("servicio-descripcion");
+    const buttonContainer = document.getElementById("button-container") 
+    updateServiceInput.value = ""
+    formTitle.value = ""
+    formSubTitle.value = ""
+    formDescription.value = ""
+    buttonContainer.innerHTML = "<button type='submit' class='btn btn-primary'>Agregar</button>"
+  }
   return (
     <div id="accordion">
       <div className="card">
@@ -29,7 +39,8 @@ export const Services = ()=>{
         <div id="collapseServices" className="collapse p-5" aria-labelledby="headingservices" data-parent="#accordion">
         <div className="d-flex flex-row justify-content-between">
           <h2>Servicios</h2>
-          <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Agregar +</button>
+          <button type="button" className="btn btn-primary" data-toggle="modal"
+           data-target="#exampleModal" data-whatever="@getbootstrap" onClick={agregarServicio}>Agregar +</button>
         
         </div>
         {services.length === 0 ? <p>Loading...</p> :
