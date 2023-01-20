@@ -1,9 +1,8 @@
-import { db} from "./config"
-import {collection,getDocs, getFirestore, query, where} from "firebase/firestore"
+import { db } from "./config"
+import {collection,doc,deleteDoc} from "firebase/firestore"
 
 
 // database
-
-export const create = (colectionName,values) => {
-    db.collection(colectionName).doc().set(values)
-  }
+export async function deleteData  (colectionName,id){
+  const document = await deleteDoc(doc(db,colectionName,id))
+}

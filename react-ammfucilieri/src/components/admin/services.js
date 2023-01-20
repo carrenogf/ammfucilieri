@@ -10,7 +10,6 @@ export const Services = ()=>{
     getDocs(collection(db,'services')).then((snapshot)=>{
       const servList = snapshot.docs.map((service)=>({id:service.id, ...service.data()}));
       setServices(servList);
-      console.log('lectura de servicios')
     })
   },[])
   // if (services.length === 0){

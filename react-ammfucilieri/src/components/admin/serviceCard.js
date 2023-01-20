@@ -1,4 +1,8 @@
+import { deleteData } from "../../firebase/database"
+import Swal from 'sweetalert2'
 export const ServiceCard = ({service})=>{
+  
+
   return (
     <div className="row border p-2">
       {/* imagen servicio */}
@@ -13,7 +17,28 @@ export const ServiceCard = ({service})=>{
       </div>
       <div className="col-12 col-sm-2 d-flex flex-column justify-content-around">
         <button className="btn btn-warning">Editar</button>
-        <button className="btn btn-danger">Eliminar</button>
+        <button className="btn btn-danger" onClick={()=>{
+          Swal.fire({
+            title:`Eliminar el servicio ${service.titulo}`,
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: 'Si',
+            denyButtonText: 'No',
+          }).then((result) => {
+            if (result.isConfirmed) {
+              deleteData('services',service.id)
+              Swal.fire({
+                title:`Se elimino el servicio ${service.titulo}`,
+                confirmButtonText: 'ok'
+              }).then((result) => {if (result.isConfirmed) {window.location.reload()}})
+              
+            } else if (result.isDenied) {
+              Swal.fire('No se eliminó el servicio', '', 'info')
+            }
+          })
+        }}
+        >Eliminar</button>
+      
       </div>
     </div>
   )
