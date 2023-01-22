@@ -14,16 +14,17 @@ export const Services = ()=>{
   },[])
   function agregarServicio() {
     const updateServiceInput = document.getElementById("serviceUpdate");
+    const formImg = document.getElementById("servicio-img");
     updateServiceInput.value = 0
     const formTitle =  document.getElementById("servicio-titulo");
     const formSubTitle =  document.getElementById("servicio-subtitulo");
     const formDescription =  document.getElementById("servicio-descripcion");
     const buttonContainer = document.getElementById("button-container") 
-    updateServiceInput.value = ""
     formTitle.value = ""
     formSubTitle.value = ""
     formDescription.value = ""
     buttonContainer.innerHTML = "<button type='submit' class='btn btn-primary'>Agregar</button>"
+    formImg.required = true;
   }
   return (
     <div id="accordion">

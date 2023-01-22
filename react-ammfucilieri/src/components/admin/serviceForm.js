@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { uploadfileUrl} from "../../firebase/storage";
+import { uploadfileUrl,getUrl} from "../../firebase/storage";
 import { getDatabase,ref as dbref,push} from "firebase/database";
 import { app } from "../../firebase/config";
 import {getFirestore,setDoc,doc} from "firebase/firestore";
@@ -25,20 +25,38 @@ export const ServiceForm = ()=> {
     event.preventDefault();
     const db = getDatabase(app);
     const updateServiceInput = document.getElementById("serviceUpdate");
-    if (updateServiceInput.value!=0){
+    console.log(updateServiceInput.value)
+    let serviceKey;
+    let formTitle;
+    let formSubTitle;
+    let formDescription;
+    let urlImg;
+    if (updateServiceInput.value==0){
       const newService =  push(dbref(db,"services"));
-      const ServiceKey = newService.key;
-      const urlImg = await uploadfileUrl(servicesFormData.imagen,`img/services/${ServiceKey}`);
-      setDoc(doc(getFirestore(app),'services',ServiceKey),{
-        titulo:servicesFormData.titulo,
-        subtitulo:servicesFormData.subtitulo,
-        descripcion:servicesFormData.descripcion,
-        urlImg:urlImg,
-      }).then(()=>window.location.reload())
+      serviceKey = newService.key;
+      formTitle =  servicesFormData.titulo
+      formSubTitle =  servicesFormData.subtitulo
+      formDescription =servicesFormData.descripcion
+      urlImg = await uploadfileUrl(servicesFormData.imagen,`img/services/${serviceKey}`);
     }else {
-      console.log(`actualizando registro ${updateServiceInput}`)
+      serviceKey = updateServiceInput.value
+      const formImg = document.getElementById("servicio-img");
+      if (!formImg.files[0]){
+        urlImg = await getUrl(`img/services/${serviceKey}`)
+      }else{
+        urlImg = await uploadfileUrl(formImg.files[0],`img/services/${serviceKey}`);
+      }
+      formTitle =  document.getElementById("servicio-titulo").value;
+      formSubTitle =  document.getElementById("servicio-subtitulo").value;
+      formDescription =  document.getElementById("servicio-descripcion").value;
     }
-
+    setDoc(doc(getFirestore(app),'services',serviceKey),{
+      titulo:formTitle,
+      subtitulo:formSubTitle,
+      descripcion:formDescription,
+      urlImg:urlImg,
+    })
+    .then(()=>window.location.reload())
 
   }
   function prueba (text) {console.log(text)}

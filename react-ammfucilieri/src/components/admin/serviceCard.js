@@ -7,12 +7,14 @@ export const ServiceCard = ({service})=>{
     const formTitle =  document.getElementById("servicio-titulo");
     const formSubTitle =  document.getElementById("servicio-subtitulo");
     const formDescription =  document.getElementById("servicio-descripcion");
-    const buttonContainer = document.getElementById("button-container") 
-    updateServiceInput.value = service.id
-    formTitle.value = service.titulo
-    formSubTitle.value = service.subtitulo
-    formDescription.value = service.descripcion
-    buttonContainer.innerHTML = "<button type='submit' class='btn btn-warning'>Editar</button>"
+    const buttonContainer = document.getElementById("button-container");
+    updateServiceInput.value = service.id;
+    formTitle.value = service.titulo;
+    formSubTitle.value = service.subtitulo;
+    formDescription.value = service.descripcion;
+    buttonContainer.innerHTML = "<button type='submit' class='btn btn-warning'>Editar</button>";
+    formImg.value = "";
+    formImg.required = false;
   }
   return (
     <div className="row border p-2">
