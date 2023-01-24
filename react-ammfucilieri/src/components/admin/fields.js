@@ -1,19 +1,10 @@
 export const fields = [
   {
-    name:"tema",
-    fromComponent:"input",
-    id:"id_tema",
-    className:"form-control",
-    label:"Nombre Tema",
-    typeInput:"text",
-    required:"required"
-  },
-  {
     name:"titulo1",
     fromComponent:"input",
     id:"id_titulo1",
     className:"form-control",
-    label:"Titulo 1",
+    label:"Titulo 1 home",
     typeInput:"text",
     required:"required"
   },
@@ -22,7 +13,7 @@ export const fields = [
     fromComponent:"textarea",
     id:"id_texto1",
     className:"form-control",
-    label:"Texto 1",
+    label:"Texto 1 home",
     typeInput:"text",
     required:"required"
   },
@@ -31,7 +22,7 @@ export const fields = [
     fromComponent:"input",
     id:"id_titulo2",
     className:"form-control",
-    label:"Titulo 2",
+    label:"Titulo 2 home",
     typeInput:"text",
     required:"required"
   },
@@ -40,7 +31,7 @@ export const fields = [
     fromComponent:"textarea",
     id:"id_texto2",
     className:"form-control",
-    label:"Texto 2",
+    label:"Texto 2 home",
     typeInput:"text",
     required:"required"
   },
