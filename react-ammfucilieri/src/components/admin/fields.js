@@ -43,3 +43,4 @@ export const imgUrls = {
   home2 : {url:"https://firebasestorage.googleapis.com/v0/b/ammfucilieri-e1512.appspot.com/o/img%2Fhome%2FimgHome2?alt=media&token=7eb174e2-0285-42ce-86eb-9f6f955940b2"},
   home3 : {url:"https://firebasestorage.googleapis.com/v0/b/ammfucilieri-e1512.appspot.com/o/img%2Fhome%2FimgHome3?alt=media&token=5cc42cbc-f35f-40d2-8b44-0694ab866f55"},
 }
+export const themeid = "lCMIelhm8WYTDxCoIBuS"

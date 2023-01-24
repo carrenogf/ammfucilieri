@@ -1,14 +1,27 @@
 import {Link} from 'react-router-dom'
 import {ContactForm} from "../components/contactForm"
-import {imgUrls} from '../components/admin/fields'
+import {imgUrls,themeid} from '../components/admin/fields'
+import {useState, useEffect } from 'react'
+import { db } from '../firebase/config'
+import {getDoc,doc} from "firebase/firestore"
 export const HomeView = () =>{
-
-
-  const textoEjemplo = "plemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años, sino que tambien ingresó como texto de relleno en documentos electrónicos, quedando esencialmente igual al original. Fue popularizado en los 60s con la creación de las hojas Letraset, las cuales contenian pasajes de Lorem Ipsum, y más recientemente con software de autoedición, como p"
-
+  const [datos,setDatos] = useState(null)
+  useEffect(()=>{
+    const getdatos = async () =>{
+      const refDatos = doc(db,'Temas',themeid);
+      const datatheme = await getDoc(refDatos);
+      if (datos==null){setDatos(datatheme.data())}
+    }
+    getdatos()
+  },[])
+  
+    if (datos!=null){
+      const textoEjemplo = "asdasd"
     return (
+     
       <div>
       <div className="container">
+      
       {/* {/* Titulo*/}
         <div className="row mt-5"><h1 className="text-center">Macarena Fucilieri</h1></div>
       {/* Presentación 1*/}
@@ -18,16 +31,16 @@ export const HomeView = () =>{
           </div>
           <div className="col-12 col-md-6">
             <div>
-            <h2 className="h1">Titulo 1</h2>
-            <p>{textoEjemplo}</p>
+            <h2 className="h1">{datos.titulo1}</h2>
+            <p>{datos.texto1}</p>
             </div>
           </div>
         </div>
       {/* Presentación 2*/}
         <div className="row mt-5 d-flex presentacion2">
           <div className="col-12 col-md-6">
-            <h2 className="h1">Titulo 2</h2>
-            <p>{textoEjemplo}</p>
+            <h2 className="h1">{datos.titulo2}</h2>
+            <p>{datos.texto2}</p>
           </div>
           <div className="col-12 col-md-6">
             <img className="img-fluid" src={imgUrls.home2.url} alt="" />
@@ -70,5 +83,5 @@ export const HomeView = () =>{
       <ContactForm/>
       </div>
       </div>
-    )
+    )}else{return("loading...")}
 }

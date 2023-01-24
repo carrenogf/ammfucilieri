@@ -3,7 +3,6 @@ import {collection,getDocs} from "firebase/firestore"
 import { useEffect,useState } from "react";
 import { ServiceCard } from "./serviceCard";
 import { ServiceForm } from "./serviceForm";
-import { getElementError } from "@testing-library/react";
 export const Services = ()=>{
   const [services,setServices] = useState([]);
   useEffect(()=>{
