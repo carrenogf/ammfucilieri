@@ -1,5 +1,9 @@
 import { Link } from "react-router-dom";
+import {useContext } from 'react'
+import { ThemeContext } from "../Context/ThemeContext";
 const Footer = ()=>{
+    const {datos} = useContext(ThemeContext);
+    if (datos!=null){
     return (
         <footer className="text-center text-lg-start bg-light text-muted mt-5">
         {/* Section: Social media  */}
@@ -8,7 +12,7 @@ const Footer = ()=>{
         >
             {/* Left  */}
             <div className="me-5 d-none d-lg-block">
-              <span>Macarena Fucilieri</span>
+              <span>{datos.tituloFooter}</span>
             </div>
             {/* Left  */}
 
@@ -34,9 +38,9 @@ const Footer = ()=>{
                 <div className="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
                 {/* Content  */}
                 <h6 className="text-uppercase fw-bold mb-4">
-                    <Link className="text-reset" to="/"><i className="fa-solid fa-address-card"></i>Macarena Fucilieri</Link>
+                    <Link className="text-reset" to="/"><i className="fa-solid fa-address-card"></i>{datos.tituloFooter}</Link>
                 </h6>
-                <p>texto</p>
+                <p>{datos.textoFooter}</p>
                 </div>
                 {/* Grid column  */}
 
@@ -44,10 +48,10 @@ const Footer = ()=>{
                 <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
                 {/* Links  */}
                 <h6 className="text-uppercase fw-bold mb-4">Servicios</h6>
-                <p><Link to="/" className="text-reset">servicio_1</Link></p>
-                <p><Link to="/" className="text-reset">servicio_2</Link></p>
-                <p><Link to="/" className="text-reset">servicio_3</Link></p>
-                <p><Link to="/" className="text-reset">servicio_4</Link></p>
+                <p><Link to="/services" className="text-reset">{datos.servicio1}</Link></p>
+                <p><Link to="/services" className="text-reset">{datos.servicio2}</Link></p>
+                <p><Link to="/services" className="text-reset">{datos.servicio3}</Link></p>
+                <p><Link to="/services" className="text-reset">{datos.servicio4}</Link></p>
                 </div>
                 {/* Grid column  */}
 
@@ -55,10 +59,11 @@ const Footer = ()=>{
                 <div className="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
                   {/* Links  */}
                   <h6 className="text-uppercase fw-bold mb-4">Links de utilidad</h6>
-                  <p><Link to="/" className="text-reset" target="_blank">link_1_nombre</Link></p>
-                  <p><Link to="/" className="text-reset" target="_blank">link_2_nombre</Link></p>
-                  <p><Link to="/" className="text-reset" target="_blank">link_3_nombre</Link></p>
-                  <p><Link to="/" className="text-reset" target="_blank">link_4_nombre</Link></p>
+                  {datos.ulink1 && datos.nombre_ulink1 ? <p><a href={datos.ulink1} className="text-reset" target="_blank">{datos.nombre_ulink1}</a></p>:""}
+                  {datos.ulink2 && datos.nombre_ulink2 ? <p><a href={datos.ulink2} className="text-reset" target="_blank">{datos.nombre_ulink2}</a></p>:""}
+                  {datos.ulink3 && datos.nombre_ulink3 ? <p><a href={datos.ulink3} className="text-reset" target="_blank">{datos.nombre_ulink3}</a></p>:""}
+                  {datos.ulink4 && datos.nombre_ulink4 ? <p><a href={datos.ulink4} className="text-reset" target="_blank">{datos.nombre_ulink4}</a></p>:""}
+
                 
                 </div>
                 {/* Grid column  */}
@@ -69,9 +74,9 @@ const Footer = ()=>{
                 <h6 className="text-uppercase fw-bold mb-4">
                     Contacto
                 </h6>
-                    <p><i className="fas fa-home me-3"></i>direccion</p>
-                    <p><i className="fas fa-envelope me-3"></i>email</p>
-                    <p><i className="fas fa-phone me-3"></i>telefono</p>                     
+                    {datos.direccion?<p><i className="fas fa-home me-3"></i>{datos.direccion}</p> : "" }
+                    {datos.email?<p><i className="fas fa-envelope me-3"></i>{datos.email}</p> : "" }
+                    {datos.telefono?<p><i className="fas fa-phone me-3"></i>{datos.telefono}</p> : "" }                    
                 </div>
                 {/* Grid column  */}
             </div>
@@ -87,6 +92,6 @@ const Footer = ()=>{
         </div>
         {/* Copyright  */}
         </footer>
-    )
+    )}else{return("")}
 }
 export default Footer;

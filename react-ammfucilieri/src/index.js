@@ -4,11 +4,14 @@ import {RouterProvider} from "react-router-dom";
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { router } from './router';
+import { ThemeContextProvider } from './Context/ThemeContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+    <ThemeContextProvider>
       <RouterProvider router={router} />
+    </ThemeContextProvider>
   </React.StrictMode>
 );
 

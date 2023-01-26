@@ -1,29 +1,20 @@
 import {Link} from 'react-router-dom'
 import {ContactForm} from "../components/contactForm"
-import {imgUrls,themeid} from '../components/admin/fields'
-import {useState, useEffect } from 'react'
-import { db } from '../firebase/config'
-import {getDoc,doc} from "firebase/firestore"
+import {imgUrls} from '../components/admin/fields'
+import {useContext } from 'react'
+import { ThemeContext } from '../Context/ThemeContext'
+
 export const HomeView = () =>{
-  const [datos,setDatos] = useState(null)
-  useEffect(()=>{
-    const getdatos = async () =>{
-      const refDatos = doc(db,'Temas',themeid);
-      const datatheme = await getDoc(refDatos);
-      if (datos==null){setDatos(datatheme.data())}
-    }
-    getdatos()
-  },[])
-  
+  const {datos} = useContext(ThemeContext);
+
     if (datos!=null){
-      const textoEjemplo = "asdasd"
     return (
      
       <div>
       <div className="container">
       
       {/* {/* Titulo*/}
-        <div className="row mt-5"><h1 className="text-center">Macarena Fucilieri</h1></div>
+        <div className="row mt-5"><h1 className="text-center">{datos.tituloGeneral}</h1></div>
       {/* Presentación 1*/}
         <div className="row mt-5 d-flex presentacion1">
           <div className="col-12 col-md-6">
@@ -66,17 +57,17 @@ export const HomeView = () =>{
         <div className="col-lg-6 col-md-12">
           <div className="home__serviceTit"><h2>Servicios</h2></div>
           <div className="row d-flex justify-content-around home__serviceCard_cont">
-            <Link to="/" className="col-12 fcc home__serviceCard text-decoration-none text-dark">
-              <h3>servicio_1</h3>
+            <Link to="/services" className="col-12 fcc home__serviceCard text-decoration-none text-dark">
+              <h3>{datos.servicio1}</h3>
             </Link>
-            <Link to="/" className="col-12 fcc home__serviceCard text-decoration-none text-dark">
-              <h3>servicio_2</h3>
+            <Link to="/services" className="col-12 fcc home__serviceCard text-decoration-none text-dark">
+              <h3>{datos.servicio2}</h3>
             </Link>
-            <Link to="/" className="col-12 fcc home__serviceCard text-decoration-none text-dark">
-              <h3>servicio_3</h3>
+            <Link to="/services" className="col-12 fcc home__serviceCard text-decoration-none text-dark">
+              <h3>{datos.servicio3}</h3>
             </Link>
-            <Link to="/" className="col-12 fcc home__serviceCard text-decoration-none text-dark">
-                <h3>servicio_4</h3>
+            <Link to="/services" className="col-12 fcc home__serviceCard text-decoration-none text-dark">
+                <h3>{datos.servicio4}</h3>
             </Link>
           </div>
         </div>

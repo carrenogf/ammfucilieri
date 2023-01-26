@@ -16,17 +16,13 @@ export const ThemeForm = ()=>{
   },[])
   function updateTheme(event){
     event.preventDefault();
-    const titulo1 = document.getElementById("id_titulo1").value;
-    const texto1 = document.getElementById("id_texto1").value;
-    const titulo2 = document.getElementById("id_titulo2").value;
-    const texto2 = document.getElementById("id_texto2").value;
+    let datosForm = {}
+    fields.forEach((field) =>{
+      datosForm[field.id] = document.getElementById(field.id).value;
+    })
+
     const docRef = doc(db,'Temas',themeid)
-    setDoc(docRef,{
-      titulo1:titulo1,
-      texto1:texto1,
-      titulo2:titulo2,
-      texto2:texto2
-    }).then(()=>{Swal.fire({title:`Datos Actualizados`})})
+    setDoc(docRef,datosForm).then(()=>{Swal.fire({title:`Datos Actualizados`})})
   }
   return (
     <div className="border rounded mt-3 mb-3 p-3">
